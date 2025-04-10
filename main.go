@@ -2,7 +2,6 @@ package main
 
 import (
 	"embed"
-	"encoding/csv"
 	"encoding/json"
 	"fmt"
 	"io/fs"
@@ -10,8 +9,8 @@ import (
 	"net"
 	"net/http"
 	"os"
+	"os/exec"
 	"path/filepath"
-	"sort"
 	"strings"
 	"time"
 )
@@ -27,7 +26,6 @@ func main() {
 
 	http.Handle("/", http.FileServer(http.FS(fs)))
 	http.HandleFunc("/submit", handleForm)
-	// http.HandleFunc("/responses.csv", serveCSV)
 
 	if err := os.MkdirAll("responses", 0755); err != nil {
 		log.Fatalf("unable to create responses folder: %v", err)
@@ -83,71 +81,33 @@ func handleForm(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	go func(data map[string]string) {
+		cmd := "/sbin/sendmail"
+		args := []string{"-t", "-i"}
+		bodyBuilder := &strings.Builder{}
+		fmt.Fprintf(bodyBuilder, "From: tiffany@runxiyu.org\n")
+		fmt.Fprintf(bodyBuilder, "To: tiffany@runxiyu.org\n")
+		fmt.Fprintf(bodyBuilder, "Subject: Survey response from %s\n", data["ip_address"])
+		fmt.Fprintf(bodyBuilder, "MIME-Version: 1.0\n")
+		fmt.Fprintf(bodyBuilder, "Content-Type: text/plain; charset=UTF-8\n")
+		fmt.Fprintf(bodyBuilder, "Content-Transfer-Encoding: 8bit\n\n")
+
+		jsonBytes, err := json.MarshalIndent(data, "", "\t")
+		if err == nil {
+			bodyBuilder.Write(jsonBytes)
+
+			sendmail := exec.Command(cmd, args...)
+			stdin, err := sendmail.StdinPipe()
+			if err == nil {
+				if err := sendmail.Start(); err == nil {
+					stdin.Write([]byte(bodyBuilder.String()))
+					stdin.Close()
+					sendmail.Wait()
+				}
+			}
+		}
+	}(data)
+
 	fmt.Fprintf(w, `恭喜您完成所有测试并衷心感谢您的参与！
 如有兴趣了解实验数据分析结果，请关注微信公众号 @WIT studio。`)
-}
-
-func serveCSV(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "text/csv")
-	w.Header().Set("Content-Disposition", "attachment;filename=responses.csv")
-
-	writer := csv.NewWriter(w)
-	defer writer.Flush()
-
-	fieldOrder := []string{
-		"gender", "age", "dialect", "wuyu_details", "guanhua_details", "other_details",
-		"usage_frequency", "fluency", "foreign_language", "music_training",
-		"absolute_pitch", "music_freq",
-	}
-	for i := 1; i <= 20; i++ {
-		fieldOrder = append(fieldOrder, fmt.Sprintf("q%d", i))
-	}
-	fieldOrder = append(fieldOrder, "cadence1", "cadence2", "cadence3", "cadence4")
-	fieldOrder = append(fieldOrder,
-		"style1trap", "style2drill", "style3drumbass", "style4reggaetton", "style5rb",
-	)
-
-	if err := writer.Write(fieldOrder); err != nil {
-		http.Error(w, "Failed to write header", http.StatusInternalServerError)
-		return
-	}
-
-	files, err := os.ReadDir("responses")
-	if err != nil {
-		http.Error(w, "Failed to read responses", http.StatusInternalServerError)
-		return
-	}
-
-	sort.Slice(files, func(i, j int) bool {
-		return files[i].Name() < files[j].Name()
-	})
-
-	for _, file := range files {
-		if !strings.HasSuffix(file.Name(), ".json") {
-			continue
-		}
-		path := filepath.Join("responses", file.Name())
-
-		f, err := os.Open(path)
-		if err != nil {
-			log.Printf("Failed to open file %s: %v", path, err)
-			continue
-		}
-
-		var data map[string]string
-		if err := json.NewDecoder(f).Decode(&data); err != nil {
-			log.Printf("Failed to decode %s: %v", path, err)
-			f.Close()
-			continue
-		}
-		f.Close()
-
-		var row []string
-		for _, key := range fieldOrder {
-			row = append(row, data[key])
-		}
-		if err := writer.Write(row); err != nil {
-			log.Printf("Failed to write row: %v", err)
-		}
-	}
 }
