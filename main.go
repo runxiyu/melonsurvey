@@ -27,7 +27,7 @@ func main() {
 
 	http.Handle("/", http.FileServer(http.FS(fs)))
 	http.HandleFunc("/submit", handleForm)
-	http.HandleFunc("/responses.csv", serveCSV)
+	// http.HandleFunc("/responses.csv", serveCSV)
 
 	if err := os.MkdirAll("responses", 0755); err != nil {
 		log.Fatalf("unable to create responses folder: %v", err)
