@@ -115,26 +115,26 @@
 			display: none !important;
 		}
 
-		#show-all-pages:checked ~ .form-wrapper #show-all-pages-label {
+		#show-all-pages:checked ~ .form-wrapper .show-all-pages-label {
 			background-color: #3498db;
 			color: #fff;
-			padding: 1px 2px;
-			border-radius: 3px;
+			padding: 3px 6px;
+			border-radius: 4px;
 			cursor: pointer;
 		}
 		
-		#show-all-pages-label {
+		.show-all-pages-label {
 			background-color: #ecf0f1;
 			color: #2c3e50;
-			padding: 1px 2px;
-			border-radius: 3px;
+			padding: 3px 6px;
+			border-radius: 4px;
 			cursor: pointer;
 		}
 
 		.pagination-buttons > label {
 			background-color: #3498db;
 			color: #fff;
-			padding: 5px 10px;
+			padding: 3px 6px;
 			border-radius: 4px;
 			cursor: pointer;
 		}
@@ -156,6 +156,13 @@
 					};
 				});
 			});
+			document.querySelectorAll('.pagination-buttons > label').forEach(label => {
+				label.addEventListener('click', () => {
+					document.getElementById('scroll-target').scrollIntoView({
+						block: 'start'
+					});
+				});
+			});
 		});
 	</script>
 </head>
@@ -173,6 +180,8 @@
 	<p>为了音频能顺利播放，请使用电脑浏览器打开问卷链接。</p>
 	<p>如您在测试过程中感到不适可随时退出，您的数据将不会被记录。</p>
 	<p>感谢您的配合！</p>
+	<label for="show-all-pages" class="show-all-pages-label">显示所有页面</label>
+	<span id="scroll-target"></span>
 	<div class="page page0">
 
 		<p>您的性别？</p>
@@ -532,7 +541,7 @@
 	<button type="submit">提交</button>
 
 	<p>
-	如果您无法提交，可能是因为有些问题没有完成。在这种情况下，请 <label for="show-all-pages" id="show-all-pages-label">显示所有页面</label>，然后再点提交的时候，浏览器就能告诉你问题出在哪里了。
+	如果您无法提交，可能是因为有些问题没有完成。在这种情况下，请 <label for="show-all-pages" class="show-all-pages-label">显示所有页面</label>，然后再点提交的时候，浏览器就能告诉你问题出在哪里了。
 	</p>
 </div>
 	</div>
