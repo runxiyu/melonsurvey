@@ -83,7 +83,8 @@ func handleForm(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	fmt.Fprintf(w, "感谢您的提交！您的数据已成功保存。")
+	fmt.Fprintf(w, `恭喜您完成所有测试并衷心感谢您的参与！
+如有兴趣了解实验数据分析结果，请关注微信公众号 @WIT studio。`)
 }
 
 func serveCSV(w http.ResponseWriter, r *http.Request) {
