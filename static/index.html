@@ -150,6 +150,22 @@
 		footer a, footer a:link, footer a:visited {
 			color: #4f5c5d;
 		}
+
+		.dialect-option .opyf {
+			display: none;
+		}
+		
+		#r_wuyu:checked ~ .opyf {
+			display: inline-block;
+		}
+		
+		#r_guanhua:checked ~ .opyf {
+			display: inline-block;
+		}
+		
+		#r_other:checked ~ .opyf {
+			display: inline-block;
+		}
 	</style>
 	<script>
 		/*
@@ -220,11 +236,25 @@
 		<label><input type="radio" name="gender" value="其他"> 其他</label>
 
 		<p>您的母语方言是？只要您家中使用除标准普通话以外的方言，就填写相应的方言。如果完全不使用方言，填写“普通话”。</p>
-		<label><input type="radio" name="dialect" value="吴语" required> 吴语（江南地区，以上海话、苏州话、杭州话为代表） <input type="text" name="wuyu_details"></label><br>
-		<label><input type="radio" name="dialect" value="粤语" required> 粤语（广东、广西皆有分布，以广府粤语为代表）</label><br>
-		<label><input type="radio" name="dialect" value="官话" required> 官话（普通话/江淮/西南/中原/东北...）<input type="text" name="guanhua_details"></label><br>
-		<label><input type="radio" name="dialect" value="其他" required> 其他（如闽/湘/赣/客家） <input type="text" name="other_details"></label>
-
+		<div class="dialect-option">
+			<input type="radio" name="dialect" id="r_wuyu" value="吴语" required>
+			<label for="r_wuyu">吴语（江南地区，以上海话、苏州话、杭州话为代表）</label>
+			<input class="opyf" type="text" name="wuyu_details">
+		</div>
+		<div class="dialect-option">
+			<input type="radio" name="dialect" id="r_yueyu" value="粤语" required>
+			<label for="r_yueyu">粤语（广东、广西皆有分布，以广府粤语为代表）</label>
+		</div>
+		<div class="dialect-option">
+			<input type="radio" name="dialect" id="r_guanhua" value="官话" required>
+			<label for="r_guanhua">官话（普通话/江淮/西南/中原/东北...）</label>
+			<input class="opyf" type="text" name="guanhua_details">
+		</div>
+		<div class="dialect-option">
+			<input type="radio" name="dialect" id="r_other" value="其他" required>
+			<label for="r_other">其他（如闽/湘/赣/客家）</label>
+			<input class="opyf" type="text" name="other_details">
+		</div>
 		<p>您使用方言的频率是？ </p>
 		<label><input type="radio" name="usage_frequency" value="每天使用" required> 每天使用</label><br>
 		<label><input type="radio" name="usage_frequency" value="每周使用1-5次" required> 每周使用 1&ndash;5 次</label><br>
