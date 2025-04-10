@@ -152,6 +152,15 @@
 		}
 	</style>
 	<script>
+		/*
+		 * Yes yes I know you can bypass this by not running JS and it
+		 * should be also patently clear that this entire page was
+		 * designed with non-JS users in mind (otherwise who would use
+		 * CSS state machines for pagination). I mean you could also
+		 * just right click on the audio and copy the URL and visit
+		 * it directly and no script could stop you from playing it...
+		 * these aren't really in our threat model :)
+		 */
 		document.addEventListener('DOMContentLoaded', () => {
 			document.querySelectorAll('audio.once').forEach(audio => {
 				audio.addEventListener('play', function handler() {
@@ -611,7 +620,7 @@
 		Content copyright (c) 2025 Tiffany Guo<br />
 		Web service copyright (c) 2025 <a href="https://runxiyu.org">Runxi Yu</a><br />
 		The web service components are licensed under <a href="https://www.gnu.org/licenses/agpl-3.0.en.html">GNU AGPL version 3</a>.<br />
-		The source code for this service is available as <a href="https://forge.runxiyu.org/stuff/-/repos/melonsurvey/">a Git repo</a>.
+		The page is served by <a href="https://forge.runxiyu.org/stuff/-/repos/melonsurvey/">Melon Survey</a>.
 		</p>
 		<details>
 			<summary>
