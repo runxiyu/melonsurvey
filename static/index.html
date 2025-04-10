@@ -140,23 +140,23 @@
 		}
 	</style>
 	<script>
-			document.addEventListener('DOMContentLoaded', () => {
-				document.querySelectorAll('audio.once').forEach(audio => {
-					audio.addEventListener('play', function handler() {
-						audio.removeEventListener('play', handler);
-						audio.onplay = e => {
-							e.preventDefault();
-							audio.pause();
-							audio.currentTime = 0;
-			
-							const warning = document.createElement('div');
-							warning.textContent = '不能重复播放';
-			
-							audio.replaceWith(warning);
-						};
-					});
+		document.addEventListener('DOMContentLoaded', () => {
+			document.querySelectorAll('audio.once').forEach(audio => {
+				audio.addEventListener('play', function handler() {
+					audio.removeEventListener('play', handler);
+					audio.onplay = e => {
+						e.preventDefault();
+						audio.pause();
+						audio.currentTime = 0;
+		
+						const warning = document.createElement('div');
+						warning.textContent = '不能重复播放';
+		
+						audio.replaceWith(warning);
+					};
 				});
 			});
+		});
 	</script>
 </head>
 <body>
@@ -244,8 +244,13 @@
 		</div>
 
 		<h2>任务 1: 请判断下列音频中的两条旋律/节奏是否相同。</h2>
-		<p>音频加载可能需要一些时间。请注意，每一个音频只能听一遍。</p>
-		<h3>旋律</h3>
+		<p>音频加载可能需要一些时间。</p>
+		<p>请注意，每一个音频只能听一遍。请先调试音量，至少让您能清晰地听见下面的测试音频。</p>
+		<table>
+			<td>测试音频</td>
+			<td><audio controls src="audio/task_2_cadence/learning/Tonic_C.wav"></audio></td>
+		</table>
+		<h3>旋律辨认测试</h3>
 		<table>
 			<thead>
 				<tr>
@@ -317,7 +322,7 @@
 				</tr>
 			</tbody>
 		</table>
-		<h3>节奏</h3>
+		<h3>节奏辨认测试</h3>
 		<table>
 			<thead>
 				<tr>
