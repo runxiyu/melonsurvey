@@ -5,197 +5,270 @@
 	<meta charset="UTF-8">
 	<title>方言背景对音乐感知与音乐学习能力的影响：实验问卷</title>
 	<style>
-		body {
-			font-family: Arial, sans-serif;
-			background-color: #f8f8f8;
-			color: #333;
-			line-height: 1.6;
-			margin: 0;
-			padding: 0 15px;
-		}
-		h1, h2 {
-			color: #2c3e50;
-		}
-		form {
-			background-color: #fff;
-			padding: 20px;
-			margin: 20px auto;
-			max-width: 900px;
-			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-			border-radius: 5px;
-		}
-		p {
-			margin-bottom: 10px;
-		}
-		label {
-			display: inline-block;
-			margin: 5px 0;
-		}
-		input[type="text"] {
-			margin-left: 5px;
-			padding: 5px;
-			width: 150px;
-		}
-		audio {
-			display: inline-block;
-			border-radius: 0;
-			vertical-align: middle;
-			padding: 0px;
-			border: 0;
-			background-color: #fff;
-			color: black;
-		}
-		ol {
-			padding-left: 20px;
-		}
-		ol li {
-			margin-bottom: 20px;
-		}
-		button[type="submit"] {
-			background-color: #3498db;
-			color: white;
-			border: none;
-			padding: 10px 20px;
-			font-size: 16px;
-			border-radius: 4px;
-			cursor: pointer;
-			margin-top: 20px;
-		}
-		button[type="submit"]:hover {
-			background-color: #2980b9;
-		}
-		br {
-			line-height: 1.5;
-		}
-		table {
-			border-collapse: collapse;
-			margin: 20px 0;
-			font-size: 16px;
-			background-color: #fff;
-		}
-		table th,
-		table td {
-			border: 1px solid #ddd;
-			padding: 0px 0.75rem;
-			vertical-align: middle;
-		}
-		table td audio {
-			margin: 0;
-		}
-		table td:has(audio:only-child), table td:has(input:only-child) {
-			padding: 0;
-		}
-		table td input[type="text"]:only-child {
-			margin: 0;
-			border: 0;
-			height: 100%;
-		}
-		table td label:only-child {
-			margin: 0rem 0.5rem;
-		}
-		table td select:only-child {
-		}
-		input[name="section"], input[name="show-all-pages"] {
-			display: none;
-		}
+/*
+:root {
+	--color-bg-body: #f8f8f8;
+	--color-text-main: #333;
+	--color-heading: hsl(86, 27%, 24%);
+	--color-bg-form: #fff;
+	--color-shadow: hsla(0, 0%, 0%, 0.1);
+	--color-button-bg: hsl(92, 69%, 53%);
+	--color-button-hover: hsl(92, 65%, 45%);
+	--color-border: #ddd;
+	--color-select-bg: hsla(86, 67%, 27%, 0.07);
+	--color-show-all-bg: hsl(92, 69%, 53%);
+	--color-show-all-text: #fff;
+	--color-label-bg: hsl(120, 8%, 94%);
+	--color-label-text: hsl(86, 27%, 24%);
+	--color-footer-text: #4f5c5d;
+}
+*/
 
-		table td select:only-child {
-			padding: 0 0.75rem;
-			margin: 0;
-			border: none;
-			outline: none;
-			width: 100%;
-			height: 100%;
-			background: #55007711;
-			font: inherit;
-			color: inherit;
-			appearance: none;
-			-webkit-appearance: none;
-			-moz-appearance: none;
-			box-sizing: border-box;
-			position: absolute;
-			top: 0;
-			right: 0;
-			bottom: 0;
-			left: 0;
-			margin: 0;
-			cursor: pointer;
-		}
-		
-		table td:has(select:only-child) {
-			padding: 0;
-			position: relative;
-		}
-		
-		.page {
-			display: none;
-		}
-		
-		#page0:checked ~ .form-wrapper form .page0,
-		#page1:checked ~ .form-wrapper form .page1,
-		#page2:checked ~ .form-wrapper form .page2,
-		#page3:checked ~ .form-wrapper form .page3 {
-			display: block;
-		}
-		
-		#show-all-pages:checked ~ .form-wrapper form .page {
-			display: block !important;
-		}
-		
-		#show-all-pages:checked ~ .form-wrapper form .pagination-buttons {
-			display: none !important;
-		}
+:root {
+	--color-bg-body: #f8f8f8;
+	--color-text-main: #333;
+	--color-heading: #2c3e50;
+	--color-bg-form: #fff;
+	--color-shadow: rgba(0, 0, 0, 0.1);
+	--color-button-bg: #3498db;
+	--color-button-hover: #2980b9;
+	--color-border: #ddd;
+	--color-select-bg: #55007711;
+	--color-show-all-bg: #3498db;
+	--color-show-all-text: #fff;
+	--color-label-bg: #ecf0f1;
+	--color-label-text: #2c3e50;
+	--color-footer-text: #4f5c5d;
+}
 
-		#show-all-pages:checked ~ .form-wrapper .show-all-pages-label {
-			background-color: #3498db;
-			color: #fff;
-			padding: 3px 6px;
-			border-radius: 4px;
-			cursor: pointer;
-		}
-		
-		.show-all-pages-label {
-			background-color: #ecf0f1;
-			color: #2c3e50;
-			padding: 3px 6px;
-			border-radius: 4px;
-			cursor: pointer;
-		}
+/*
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-bg-body: #121212;
+		--color-text-main: #e0e0e0;
+		--color-heading: hsl(86, 27%, 75%);
+		--color-bg-form: #1e1e1e;
+		--color-shadow: hsla(0, 0%, 100%, 0.05);
+		--color-button-bg: hsl(92, 69%, 40%);
+		--color-button-hover: hsl(92, 65%, 35%);
+		--color-border: #444;
+		--color-select-bg: hsla(86, 67%, 60%, 0.08);
+		--color-show-all-bg: hsl(92, 69%, 40%);
+		--color-show-all-text: #fff;
+		--color-label-bg: hsl(120, 5%, 20%);
+		--color-label-text: hsl(86, 27%, 75%);
+		--color-footer-text: #a0b0a2;
+	}
+	img {
+		filter: invert(1) brightness(1.15) contrast(0.765);
+	}
+}
+*/
 
-		.pagination-buttons > label {
-			background-color: #3498db;
-			color: #fff;
-			padding: 3px 6px;
-			border-radius: 4px;
-			cursor: pointer;
-		}
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-bg-body: #121212;
+		--color-text-main: #e0e0e0;
+		--color-heading: #a9cde6;
+		--color-bg-form: #1e1e1e;
+		--color-shadow: rgba(255, 255, 255, 0.05);
+		--color-button-bg: #3498db;
+		--color-button-hover: #2980b9;
+		--color-border: #444;
+		--color-select-bg: rgba(85, 0, 119, 0.1);
+		--color-show-all-bg: #3498db;
+		--color-show-all-text: #fff;
+		--color-label-bg: #2c3e50;
+		--color-label-text: #ecf0f1;
+		--color-footer-text: #a0b0b5;
+	}
 
-		footer {
-			max-width: 900px;
-			margin: 20px auto;
-			font-size: 10px;
-			color: #4f5c5d;
-			line-height: 1.2;
-		}
-		footer a, footer a:link, footer a:visited {
-			color: #4f5c5d;
-		}
+	img {
+		filter: invert(1) brightness(1.15) contrast(0.765);
+	}
+}
 
-		.dialect-option .opyf {
-			display: none;
-		}
-		
-		#r_wuyu:checked ~ .opyf {
-			display: inline-block;
-		}
-		
-		#r_guanhua:checked ~ .opyf {
-			display: inline-block;
-		}
-		
-		#r_other:checked ~ .opyf {
-			display: inline-block;
-		}
+body {
+	font-family: Arial, sans-serif;
+	background-color: var(--color-bg-body);
+	color: var(--color-text-main);
+	line-height: 1.6;
+	margin: 0;
+	padding: 0 15px;
+}
+h1, h2 {
+	color: var(--color-heading);
+}
+form {
+	background-color: var(--color-bg-form);
+	padding: 20px;
+	margin: 20px auto;
+	max-width: 900px;
+	box-shadow: 0 0 10px var(--color-shadow);
+	border-radius: 5px;
+}
+p {
+	margin-bottom: 10px;
+}
+label {
+	display: inline-block;
+	margin: 5px 0;
+}
+input[type="text"] {
+	margin-left: 5px;
+	padding: 5px;
+	width: 150px;
+}
+audio {
+	display: inline-block;
+	border-radius: 0;
+	vertical-align: middle;
+	padding: 0px;
+	border: 0;
+	background-color: var(--color-bg-form);
+	color: black;
+}
+ol {
+	padding-left: 20px;
+}
+ol li {
+	margin-bottom: 20px;
+}
+button[type="submit"] {
+	background-color: var(--color-button-bg);
+	color: var(--color-show-all-text);
+	border: none;
+	padding: 10px 20px;
+	font-size: 16px;
+	border-radius: 4px;
+	cursor: pointer;
+	margin-top: 20px;
+}
+button[type="submit"]:hover {
+	background-color: var(--color-button-hover);
+}
+br {
+	line-height: 1.5;
+}
+table {
+	border-collapse: collapse;
+	margin: 20px 0;
+	font-size: 16px;
+	background-color: var(--color-bg-form);
+}
+table th,
+table td {
+	border: 1px solid var(--color-border);
+	padding: 0px 0.75rem;
+	vertical-align: middle;
+}
+table td audio {
+	margin: 0;
+}
+table td:has(audio:only-child),
+table td:has(input:only-child) {
+	padding: 0;
+}
+table td input[type="text"]:only-child {
+	margin: 0;
+	border: 0;
+	height: 100%;
+}
+table td label:only-child {
+	margin: 0rem 0.5rem;
+}
+table td select:only-child {
+}
+input[name="section"],
+input[name="show-all-pages"] {
+	display: none;
+}
+table td select:only-child {
+	padding: 0 0.75rem;
+	margin: 0;
+	border: none;
+	outline: none;
+	width: 100%;
+	height: 100%;
+	background: var(--color-select-bg);
+	font: inherit;
+	color: inherit;
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	box-sizing: border-box;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	margin: 0;
+	cursor: pointer;
+}
+table td:has(select:only-child) {
+	padding: 0;
+	position: relative;
+}
+.page {
+	display: none;
+}
+#page0:checked ~ .form-wrapper form .page0,
+#page1:checked ~ .form-wrapper form .page1,
+#page2:checked ~ .form-wrapper form .page2,
+#page3:checked ~ .form-wrapper form .page3 {
+	display: block;
+}
+#show-all-pages:checked ~ .form-wrapper form .page {
+	display: block !important;
+}
+#show-all-pages:checked ~ .form-wrapper form .pagination-buttons {
+	display: none !important;
+}
+#show-all-pages:checked ~ .form-wrapper .show-all-pages-label {
+	background-color: var(--color-show-all-bg);
+	color: var(--color-show-all-text);
+	padding: 3px 6px;
+	border-radius: 4px;
+	cursor: pointer;
+}
+.show-all-pages-label {
+	background-color: var(--color-label-bg);
+	color: var(--color-label-text);
+	padding: 3px 6px;
+	border-radius: 4px;
+	cursor: pointer;
+}
+.pagination-buttons > label {
+	background-color: var(--color-show-all-bg);
+	color: var(--color-show-all-text);
+	padding: 3px 6px;
+	border-radius: 4px;
+	cursor: pointer;
+}
+footer {
+	max-width: 900px;
+	margin: 20px auto;
+	font-size: 10px;
+	color: var(--color-footer-text);
+	line-height: 1.2;
+}
+footer a,
+footer a:link,
+footer a:visited {
+	color: var(--color-footer-text);
+}
+.dialect-option .opyf {
+	display: none;
+}
+#r_wuyu:checked ~ .opyf {
+	display: inline-block;
+}
+#r_guanhua:checked ~ .opyf {
+	display: inline-block;
+}
+#r_other:checked ~ .opyf {
+	display: inline-block;
+}
 	</style>
 	<script>
 		/*
