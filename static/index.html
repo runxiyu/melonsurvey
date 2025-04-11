@@ -269,6 +269,9 @@ footer a:visited {
 #r_other:checked ~ .opyf {
 	display: inline-block;
 }
+.needed {
+	color: red;
+}
 	</style>
 	<script>
 		/*
@@ -325,7 +328,7 @@ footer a:visited {
 	<span id="scroll-target"></span>
 	<div class="page page0">
 
-		<p>您的年龄段？</p>
+		<p>您的年龄段？<span class="needed">*</span></p>
 		<label><input type="radio" name="age" value="18岁以下" required> 18 岁以下</label>
 		<label><input type="radio" name="age" value="18~25" required> 18&ndash;25</label>
 		<label><input type="radio" name="age" value="26~30" required> 26&ndash;30</label>
@@ -339,7 +342,7 @@ footer a:visited {
 		<label><input type="radio" name="gender" value="女"> 女</label>
 		<label><input type="radio" name="gender" value="其他"> 其他</label>
 
-		<p>您的母语方言是？只要您家中使用除标准普通话以外的方言，就填写相应的方言。如果完全不使用方言，填写“普通话”。</p>
+		<p>您的母语方言是？只要您家中使用除标准普通话以外的方言，就填写相应的方言。如果完全不使用方言，填写“普通话”。<span class="needed">*</span></p>
 		<div class="dialect-option">
 			<input type="radio" name="dialect" id="r_wuyu" value="吴语" required>
 			<label for="r_wuyu">吴语（江南地区，以上海话、苏州话、杭州话为代表）</label>
@@ -359,27 +362,27 @@ footer a:visited {
 			<label for="r_other">其他（如闽/湘/赣/客家）</label>
 			<input class="opyf" type="text" name="other_details">
 		</div>
-		<p>您使用方言的频率是？ </p>
+		<p>您使用方言的频率是？<span class="needed">*</span></p>
 		<label><input type="radio" name="usage_frequency" value="每天使用" required> 每天使用</label><br>
 		<label><input type="radio" name="usage_frequency" value="每周使用1-5次" required> 每周使用 1&ndash;5 次</label><br>
 		<label><input type="radio" name="usage_frequency" value="每月使用1-5次" required> 每月使用 1&ndash;5 次</label><br>
 		<label><input type="radio" name="usage_frequency" value="几乎不使用" required> 几乎不使用</label>
 
-		<p>您认为自己的方言流利程度是？</p>
+		<p>您认为自己的方言流利程度是？<span class="needed">*</span></p>
 		<label><input type="radio" name="fluency" value="1" required> 1 听得懂但不会说</label>
 		<label><input type="radio" name="fluency" value="2" required> 2</label>
 		<label><input type="radio" name="fluency" value="3" required> 3</label>
 		<label><input type="radio" name="fluency" value="4" required> 4</label>
 		<label><input type="radio" name="fluency" value="5" required> 5 所有交流都可用方言完成</label>
 
-		<p>您是否学习过外国语言（如英语、日语等，不包含中文或汉语方言）？如有，学过多少门？</p>
+		<p>您是否学习过外国语言（如英语、日语等，不包含中文或汉语方言）？如有，学过多少门？<span class="needed">*</span></p>
 		<label><input type="radio" name="foreign_language" value="无" required> 无</label>
 		<label><input type="radio" name="foreign_language" value="1" required> 1</label>
 		<label><input type="radio" name="foreign_language" value="2" required> 2</label>
 		<label><input type="radio" name="foreign_language" value="3" required> 3</label>
 		<label><input type="radio" name="foreign_language" value="3门以上" required> 3 门以上</label>
 
-		<p>您是否接受过系统的音乐训练（学习乐器/作曲等）？如有，接受训练的时间是？</p>
+		<p>您是否接受过系统的音乐训练（学习乐器/作曲等）？如有，接受训练的时间是？<span class="needed">*</span></p>
 		<label><input type="radio" name="music_training" value="无" required> 无</label>
 		<label><input type="radio" name="music_training" value="1年以下" required> 1 年以下</label>
 		<label><input type="radio" name="music_training" value="1-3年" required> 1&ndash;3 年</label>
@@ -387,11 +390,11 @@ footer a:visited {
 		<label><input type="radio" name="music_training" value="5-10年" required> 5&ndash;10 年</label>
 		<label><input type="radio" name="music_training" value="10年以上" required> 10 年以上</label>
 
-		<p>您是否有绝对音感？</p>
+		<p>您是否有绝对音感？<span class="needed">*</span></p>
 		<label><input type="radio" name="absolute_pitch" value="是" required> 是</label>
 		<label><input type="radio" name="absolute_pitch" value="否" required> 否</label>
 
-		<p>您平常听音乐的频率是？</p>
+		<p>您平常听音乐的频率是？<span class="needed">*</span></p>
 		<label><input type="radio" name="music_freq" value="每天" required> 每天</label>
 		<label><input type="radio" name="music_freq" value="每周3-4次" required> 每周 3&ndash;4 次</label>
 		<label><input type="radio" name="music_freq" value="每周1-2次" required> 每周 1&ndash;2 次</label>
@@ -420,7 +423,7 @@ footer a:visited {
 				<tr>
 					<th>序号</th>
 					<th>音频</th>
-					<th colspan="2">选项</th>
+					<th colspan="2">选项 <span class="needed">*</span></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -492,7 +495,7 @@ footer a:visited {
 				<tr>
 					<th>序号</th>
 					<th>音频</th>
-					<th colspan="2">选项</th>
+					<th colspan="2">选项 <span class="needed">*</span></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -605,7 +608,7 @@ footer a:visited {
 		<table>
 			<thead>
 				<tr>
-					<th scope="col">终止式</th>
+					<th scope="col">终止式 <span class="needed">*</span></th>
 					<th scope="col">音频</th>
 				</tr>
 			</thead>
@@ -713,7 +716,7 @@ footer a:visited {
 			</colgroup>
 			<thead>
 				<tr>
-					<th scope="col">风格</th>
+					<th scope="col">风格 <span class="needed">*</span></th>
 					<th scope="col">真实片段音频</th>
 				</tr>
 			</thead>
