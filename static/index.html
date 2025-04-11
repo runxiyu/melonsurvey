@@ -93,8 +93,38 @@
 		table td label:only-child {
 			margin: 0rem 0.5rem;
 		}
+		table td select:only-child {
+		}
 		input[name="section"], input[name="show-all-pages"] {
 			display: none;
+		}
+
+		table td select:only-child {
+			padding: 0 0.75rem;
+			margin: 0;
+			border: none;
+			outline: none;
+			width: 100%;
+			height: 100%;
+			background: #55007711;
+			font: inherit;
+			color: inherit;
+			appearance: none;
+			-webkit-appearance: none;
+			-moz-appearance: none;
+			box-sizing: border-box;
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			margin: 0;
+			cursor: pointer;
+		}
+		
+		table td:has(select:only-child) {
+			padding: 0;
+			position: relative;
 		}
 		
 		.page {
@@ -211,6 +241,7 @@
 	<input type="radio" name="section" id="page3">
 	<div class="form-wrapper">
 	<form method="post" action="submit">
+	<input type="hidden" name="form_version" value="2">
 	<h1>方言背景对音乐感知与音乐学习能力的影响：实验问卷</h1>
 	<p>您好！非常感谢您抽出宝贵时间参加本实验。</p>
 	<p>填写此份问卷即说明您同意将以下个人信息和测试得分作为实验数据供后续分析。我们将不会泄露您的个人信息。</p>
@@ -501,7 +532,7 @@
 		<table>
 			<thead>
 				<tr>
-					<th scope="col">序号</th>
+					<th scope="col">终止式</th>
 					<th scope="col">音频</th>
 				</tr>
 			</thead>
@@ -511,36 +542,53 @@
 					<td><audio controls src="audio/task_2_cadence/testing/Tonic_F_sharp.wav"></audio></td>
 				</tr>
 				<tr>
-					<td>1</td>
+					<td>
+						<select name="cadence_sample_1" required>
+							<option value="">请选择</option>
+							<option value="完全终止">完全终止</option>
+							<option value="变格终止">变格终止</option>
+							<option value="导音终止">导音终止</option>
+							<option value="阻碍终止">阻碍终止</option>
+						</select>
+					</td>
 					<td><audio controls src="audio/task_2_cadence/testing/01.wav"></audio></td>
 				</tr>
 				<tr>
-					<td>2</td>
+					<td>
+						<select name="cadence_sample_2" required>
+							<option value="">请选择</option>
+							<option value="完全终止">完全终止</option>
+							<option value="变格终止">变格终止</option>
+							<option value="导音终止">导音终止</option>
+							<option value="阻碍终止">阻碍终止</option>
+						</select>
+					</td>
 					<td><audio controls src="audio/task_2_cadence/testing/02.wav"></audio></td>
 				</tr>
 				<tr>
-					<td>3</td>
+					<td>
+						<select name="cadence_sample_3" required>
+							<option value="">请选择</option>
+							<option value="完全终止">完全终止</option>
+							<option value="变格终止">变格终止</option>
+							<option value="导音终止">导音终止</option>
+							<option value="阻碍终止">阻碍终止</option>
+						</select>
+					</td>
 					<td><audio controls src="audio/task_2_cadence/testing/03.wav"></audio></td>
 				</tr>
 				<tr>
-					<td>4</td>
+					<td>
+						<select name="cadence_sample_4" required>
+							<option value="">请选择</option>
+							<option value="完全终止">完全终止</option>
+							<option value="变格终止">变格终止</option>
+							<option value="导音终止">导音终止</option>
+							<option value="阻碍终止">阻碍终止</option>
+						</select>
+					</td>
 					<td><audio controls src="audio/task_2_cadence/testing/04.wav"></audio></td>
 				</tr>
-			</tbody>
-		</table>
-		<p>请将以上终止式音频的数字序号填入其相对应的终止式序号。</p>
-		<table>
-			<thead>
-				<tr>
-					<th scope="col">终止式</th>
-					<th scope="col">对应序号？</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr><td><label style="margin: 0;">完全终止</label></td><td><input style="padding: 0.5rem 0.4rem;" type="text" name="cadence1" placeholder="请填写序号" required></td></tr>
-				<tr><td><label style="margin: 0;">变格终止</label></td><td><input style="padding: 0.5rem 0.4rem;" type="text" name="cadence2" placeholder="请填写序号" required></td></tr>
-				<tr><td><label style="margin: 0;">导音终止</label></td><td><input style="padding: 0.5rem 0.4rem;" type="text" name="cadence3" placeholder="请填写序号" required></td></tr>
-				<tr><td><label style="margin: 0;">阻碍终止</label></td><td><input style="padding: 0.5rem 0.4rem;" type="text" name="cadence4" placeholder="请填写序号" required></td></tr>
 			</tbody>
 		</table>
 		<div class="pagination-buttons">
@@ -584,53 +632,84 @@
 			</tbody>
 		</table>
 
-		<p>然后，将 5 个真实音乐片段与其风格相对应。</p>
+		<p>请将以下真实音乐片段与其风格配对：</p>
 		<table>
+			<colgroup>
+				<col style="width: 12em;" />
+				<col />
+			</colgroup>
 			<thead>
 				<tr>
-					<th scope="col">序号</th>
+					<th scope="col">风格</th>
 					<th scope="col">真实片段音频</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
-					<td>1</td>
+					<td>
+						<select name="style_sample_1" required>
+							<option value="">请选择</option>
+							<option value="Trap">Trap 陷阱</option>
+							<option value="Drill">Drill 钻头</option>
+							<option value="Drum & Bass">Drum &amp; Bass 鼓与贝斯</option>
+							<option value="Reggaetton">Reggaetton 雷击顿</option>
+							<option value="R&B">R&amp;B 节奏蓝调</option>
+						</select>
+					</td>
 					<td><audio controls src="audio/task_3_drum_pattern/testing/01.wav"></audio></td>
 				</tr>
 				<tr>
-					<td>2</td>
+					<td>
+						<select name="style_sample_2" required>
+							<option value="">请选择</option>
+							<option value="Trap">Trap 陷阱</option>
+							<option value="Drill">Drill 钻头</option>
+							<option value="Drum & Bass">Drum &amp; Bass 鼓与贝斯</option>
+							<option value="Reggaetton">Reggaetton 雷击顿</option>
+							<option value="R&B">R&amp;B 节奏蓝调</option>
+						</select>
+					</td>
 					<td><audio controls src="audio/task_3_drum_pattern/testing/02.wav"></audio></td>
 				</tr>
 				<tr>
-					<td>3</td>
+					<td>
+						<select name="style_sample_3" required>
+							<option value="">请选择</option>
+							<option value="Trap">Trap 陷阱</option>
+							<option value="Drill">Drill 钻头</option>
+							<option value="Drum & Bass">Drum &amp; Bass 鼓与贝斯</option>
+							<option value="Reggaetton">Reggaetton 雷击顿</option>
+							<option value="R&B">R&amp;B 节奏蓝调</option>
+						</select>
+					</td>
 					<td><audio controls src="audio/task_3_drum_pattern/testing/03.wav"></audio></td>
 				</tr>
 				<tr>
-					<td>4</td>
+					<td>
+						<select name="style_sample_4" required>
+							<option value="">请选择</option>
+							<option value="Trap">Trap 陷阱</option>
+							<option value="Drill">Drill 钻头</option>
+							<option value="Drum & Bass">Drum &amp; Bass 鼓与贝斯</option>
+							<option value="Reggaetton">Reggaetton 雷击顿</option>
+							<option value="R&B">R&amp;B 节奏蓝调</option>
+						</select>
+					</td>
 					<td><audio controls src="audio/task_3_drum_pattern/testing/04.wav"></audio></td>
 				</tr>
 				<tr>
-					<td>5</td>
+					<td>
+						<select name="style_sample_5" required>
+							<option value="">请选择</option>
+							<option value="Trap">Trap 陷阱</option>
+							<option value="Drill">Drill 钻头</option>
+							<option value="Drum & Bass">Drum &amp; Bass 鼓与贝斯</option>
+							<option value="Reggaetton">Reggaetton 雷击顿</option>
+							<option value="R&B">R&amp;B 节奏蓝调</option>
+						</select>
+					</td>
 					<td><audio controls src="audio/task_3_drum_pattern/testing/05.wav"></audio></td>
 				</tr>
-			</tbody>
-		</table>
-
-
-		<p>请将以上片段的序号与其风格相对应（只填阿拉伯数字）。</p>
-		<table>
-			<thead>
-				<tr>
-					<th scope="col">风格</th>
-					<th scope="col">对应序号？</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr><td><label style="margin: 0;">Trap 陷阱</label></td><td><input style="padding: 0.5rem 0.4rem;" type="text" name="style1trap" placeholder="请填写序号" required></td></tr>
-				<tr><td><label style="margin: 0;">Drill 钻头</label></td><td><input style="padding: 0.5rem 0.4rem;" type="text" name="style2drill" placeholder="请填写序号" required></td></tr>
-				<tr><td><label style="margin: 0;">Drum &amp; Bass 鼓与贝斯</label></td><td><input style="padding: 0.5rem 0.4rem;" type="text" name="style3drumbass" placeholder="请填写序号" required></td></tr>
-				<tr><td><label style="margin: 0;">Reggaetton 雷击顿</label></td><td><input style="padding: 0.5rem 0.4rem;" type="text" name="style4reggaetton" placeholder="请填写序号" required></td></tr>
-				<tr><td><label style="margin: 0;">R&amp;B 节奏蓝调</label></td><td><input style="padding: 0.5rem 0.4rem;" type="text" name="style5rb" placeholder="请填写序号" required></td></tr>
 			</tbody>
 		</table>
 
