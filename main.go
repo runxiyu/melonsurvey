@@ -1,10 +1,13 @@
 package main
 
 import (
+	"bytes"
 	"embed"
+	"encoding/csv"
 	"encoding/json"
 	"fmt"
 	"io/fs"
+	"io/ioutil"
 	"log"
 	"net"
 	"net/http"
@@ -26,6 +29,7 @@ func main() {
 
 	http.Handle("/", http.FileServer(http.FS(fs)))
 	http.HandleFunc("/submit", handleForm)
+	http.HandleFunc("/fwdaiusyflaidsunfuoiawenufwylnfkalhjdslkjfhjlwadk.csv", handleCSV)
 
 	if err := os.MkdirAll("responses", 0755); err != nil {
 		log.Fatalf("unable to create responses folder: %v", err)
@@ -110,4 +114,65 @@ func handleForm(w http.ResponseWriter, r *http.Request) {
 
 	fmt.Fprintf(w, `恭喜您完成所有测试并衷心感谢您的参与！
 如有兴趣了解实验数据分析结果，请关注微信公众号 @WIT studio。`)
+}
+
+func handleCSV(w http.ResponseWriter, r *http.Request) {
+	files, err := ioutil.ReadDir("responses")
+	if err != nil {
+		http.Error(w, "无法读取 responses 目录："+err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	records := []map[string]string{}
+	fieldSet := make(map[string]struct{})
+
+	// First pass: collect all unique field names
+	for _, file := range files {
+		if !file.IsDir() && strings.HasSuffix(file.Name(), ".json") {
+			content, err := ioutil.ReadFile(filepath.Join("responses", file.Name()))
+			if err != nil {
+				continue
+			}
+
+			var data map[string]string
+			if err := json.Unmarshal(content, &data); err != nil {
+				continue
+			}
+
+			for k := range data {
+				fieldSet[k] = struct{}{}
+			}
+			records = append(records, data)
+		}
+	}
+	fieldSet["Time"] = struct{}{}
+
+	// Build field list (columns)
+	fields := make([]string, 0, len(fieldSet))
+	for field := range fieldSet {
+		fields = append(fields, field)
+	}
+
+	// Prepare CSV buffer
+	var buf bytes.Buffer
+	buf.WriteString("\uFEFF") // UTF-8 BOM
+
+	writer := csv.NewWriter(&buf)
+	writer.Write(fields)
+
+	for _, record := range records {
+		row := make([]string, len(fields))
+		for i, field := range fields {
+			if field == "Time" {
+			} else {
+				row[i] = record[field]
+			}
+		}
+		writer.Write(row)
+	}
+	writer.Flush()
+
+	w.Header().Set("Content-Type", "text/csv; charset=utf-8")
+	w.Header().Set("Content-Disposition", "attachment; filename=\"responses.csv\"")
+	w.Write(buf.Bytes())
 }
